@@ -5,7 +5,7 @@ type AppProps = {
 }
 
 const App: React.FC<AppProps> = () => {
-  const inputRef1 = useRef<HTMLInputElement>(null)
+  const inputRef1 = useRef<HTMLInputElement>(null) 
   const inputRef2 = createRef<HTMLInputElement>()
   const handleFocus1 = () => { 
     inputRef1.current?.focus()
