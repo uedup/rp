@@ -56,17 +56,41 @@ const List: React.FC<IProps> = (props) => {
             setInputing(null)
         }
     }
+    const handleUpdataBlur = (e: React.FocusEvent<HTMLInputElement>, id: string) => {
+        const input = (e.target as HTMLInputElement)
+        const v = input.value;
+        if (v.length > 0) {
+            let newList = [...props.list]
+            newList.forEach((item) => {
+                if (item.id === id) item.txt = v
+            })
+            props.setList(newList)
+            setInputing(null)
+        }
+    }
     return (
         <>
             <ul className="list">
                 {props.list.map((item, index) => {
-                    return (<li key={item.id} className={item.checked ? 'done' : ''}>
-                        <input onChange={handleDone} type="checkbox" name={item.id} id={item.id} checked={item.checked} />
-                        <label className={inputing === item.id ? 'inputing' : ''} onDoubleClick={(e) => { intoEdit(e, item.id) }}>
+                    return (<li
+                        key={item.id}
+                        className={item.checked ? 'done' : ''}
+                        onDoubleClick={(e) => { intoEdit(e, item.id) }}>
+                        <input type="checkbox"
+                            onChange={handleDone}
+                            name={item.id}
+                            id={item.id}
+                            checked={item.checked} />
+                        <span className='num'>{index > 9 ? index : '0' + index}</span>
+                        <label htmlFor={item.id} className={inputing === item.id ? 'inputing' : ''} >
                             <span>{item.txt} </span>
-                            <input type="text" defaultValue={item.txt} onKeyUp={(e) => { handleUpdata(e, item.id) }} />
+                            <input type="text"
+                                defaultValue={item.txt}
+                                onKeyUp={(e) => { handleUpdata(e, item.id) }}
+                                onBlur={(e) => { handleUpdataBlur(e, item.id) }}
+                            />
                         </label>
-                        <button className="del" onClick={() => { removeItem(item.id) }}>删除</button>
+                        <b className="btn" onClick={() => { removeItem(item.id) }}>DEL</b>
                     </li>)
                 })}
             </ul>

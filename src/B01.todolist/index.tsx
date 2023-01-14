@@ -29,10 +29,10 @@ const App: React.FC<AppProps> = () => {
       checked: true
     }
   ]
-  const [list, setList] = useState(data&&data?.length>0?JSON.parse(data):defList)
+  const [list, setList] = useState(data && data?.length > 0 ? JSON.parse(data) : defList)
   const changeList = (list: ListType[]) => {
     setList(list)
-    localStorage.setItem('todoList',JSON.stringify(list))
+    localStorage.setItem('todoList', JSON.stringify(list))
   }
   const handleAdd = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const input = (e.target as HTMLInputElement)
@@ -51,7 +51,12 @@ const App: React.FC<AppProps> = () => {
     <>
       <div className="hr"></div>
       <div className="todo">
-        <input type="text" className="search" onKeyUp={handleAdd} />
+        <input type="text" className="search"
+          defaultValue='Please,input your new task ...'
+          onKeyUp={handleAdd}
+          onFocus={(e) => { e.target.value = '' }} 
+          onBlur={(e) => { e.target.value = 'Please,input your new task ...' }} 
+        />
         <List list={list} setList={changeList} />
       </div>
     </>
