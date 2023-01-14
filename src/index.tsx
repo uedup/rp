@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Demo from './A01.promise/promise-手写';
+import Demo from './B01.todolist';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
@@ -10,7 +10,6 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <Demo />
-    {/* <Demo message='我是消息'>haha</Demo> */}
   </React.StrictMode> 
 );
 
