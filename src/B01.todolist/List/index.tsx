@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useState } from 'react';
 
-import "./index.css"
+// import "./index.css"
 
 type ListType = {
     id: string,
@@ -10,61 +10,42 @@ type ListType = {
 }
 type IProps = {
     list: ListType[],
-    setList: Function
+    changItem: Function,
+    removeItem: Function,
+    updateItem: Function,
 }
 
 const List: React.FC<IProps> = (props) => {
+    const {
+        changItem,
+        removeItem,
+        updateItem,
+    } = props;
     const [inputing, setInputing] = useState<null | string>(null)
-    const getDone = () => {
-        let n = 0;
-        props.list.forEach((item) => {
-            return item.checked ? n++ : ''
-        })
-        return n;
+
+    const handleDone = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
+        changItem(id, e.target.checked)
     }
-    const handleDone = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newList = [...props.list]
-        newList.forEach((item) => {
-            if (item.id === e.target.id) { item.checked = !item.checked }
-        })
-        props.setList(newList)
+    const handleRemove = (id: string) => {
+        removeItem(id)
     }
-    const handleDoneAll = (e: React.ChangeEvent<HTMLInputElement>) => {
-        let newList = [...props.list]
-        newList.forEach((item) => {
-            item.checked = e.target.checked
-        })
-        props.setList(newList)
-    }
-    const removeItem = (id: string) => {
-        let newList = [...props.list].filter(item => item.id !== id)
-        props.setList(newList)
+    const handleUpdata = (e: React.KeyboardEvent<HTMLInputElement>, id: string) => {
+        const input = (e.target as HTMLInputElement)
+        const v = input.value.trim();
+        if (e.code === 'Enter' && v.length > 0) {
+            updateItem(id, v)
+            setInputing(null)
+        }
     }
     const intoEdit = (e: React.MouseEvent<HTMLElement>, id: string) => {
         // e.stopPropagation()
         setInputing(id)
     }
-    const handleUpdata = (e: React.KeyboardEvent<HTMLInputElement>, id: string) => {
-        const input = (e.target as HTMLInputElement)
-        const v = input.value;
-        if (e.code === 'Enter' && v.length > 0) {
-            let newList = [...props.list]
-            newList.forEach((item) => {
-                if (item.id === id) item.txt = v
-            })
-            props.setList(newList)
-            setInputing(null)
-        }
-    }
     const handleUpdataBlur = (e: React.FocusEvent<HTMLInputElement>, id: string) => {
         const input = (e.target as HTMLInputElement)
         const v = input.value;
         if (v.length > 0) {
-            let newList = [...props.list]
-            newList.forEach((item) => {
-                if (item.id === id) item.txt = v
-            })
-            props.setList(newList)
+            updateItem(id, v)
             setInputing(null)
         }
     }
@@ -77,7 +58,7 @@ const List: React.FC<IProps> = (props) => {
                         className={item.checked ? 'done' : ''}
                         onDoubleClick={(e) => { intoEdit(e, item.id) }}>
                         <input type="checkbox"
-                            onChange={handleDone}
+                            onChange={(e) => { handleDone(e, item.id) }}
                             name={item.id}
                             id={item.id}
                             checked={item.checked} />
@@ -90,14 +71,10 @@ const List: React.FC<IProps> = (props) => {
                                 onBlur={(e) => { handleUpdataBlur(e, item.id) }}
                             />
                         </label>
-                        <b className="btn" onClick={() => { removeItem(item.id) }}>DEL</b>
+                        <b className="btn" onClick={() => { handleRemove(item.id) }}>DEL</b>
                     </li>)
                 })}
             </ul>
-            <div className="result">
-                <input type="checkbox" name="" id="" onChange={handleDoneAll} />
-                <label htmlFor="">已完成{getDone()}/全部{props.list.length}</label>
-            </div>
         </>
     )
 }
