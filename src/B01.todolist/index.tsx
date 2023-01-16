@@ -72,6 +72,23 @@ const App: React.FC<AppProps> = () => {
     })
     return [n, list.length];
   }
+  const exchangePos = (from: number, to: number) => {
+    // console.log(from, to)
+    let newList: ListType[] = [];
+    list.forEach((item: ListType, i: number) => {
+      if (to === i) {
+        newList.push(list[from])
+      }
+      if (from === i) {
+        return;
+      }
+      newList.push(item)
+    })
+    if(to === list.length){
+      newList.push(list[from])
+    }
+    changeList(newList)
+  }
   return (
     <>
       <div className="hr"></div>
@@ -82,6 +99,7 @@ const App: React.FC<AppProps> = () => {
           changItem={changItem}
           removeItem={removeItem}
           updateItem={updateItem}
+          exchangePos={exchangePos}
         />
         <Footer
           changeAllItem={changeAllItem}

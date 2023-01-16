@@ -37,6 +37,7 @@
   border-bottom: 1px solid #ccc;
   padding: 0 10px;
 }
+
 .list li .num {
   background-color: rgba(241, 202, 245, 0.6);
   margin-right: 5px;
@@ -69,6 +70,16 @@
 .list li:last-child {
   border-bottom: 0;
 }
+.list li.from{
+    opacity: 0.3;
+}
+.list li.to{
+    border-top: 2px solid rgba(56, 4, 4, 0.66);
+    /* background-color: rgba(239, 163, 163, 0.16); */
+}
+.list li.toLast{
+    border-bottom: 2px solid rgba(56, 4, 4, 0.66);
+}
 .list .btn {
   display: none;
   position: absolute;
@@ -83,7 +94,7 @@
   cursor: pointer;
 }
 .list li:hover {
-  background-color: rgba(239, 163, 163, 0.66);
+  /* background-color: rgba(239, 163, 163, 0.66); */
 }
 .list li:hover .btn {
   display: inline-block;

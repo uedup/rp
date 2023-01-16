@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { useState } from 'react';
-
-// import "./index.css"
+import { useState, useEffect } from 'react';
+import classNames from 'classnames'
+import './index.css'
 
 type ListType = {
     id: string,
@@ -13,6 +13,7 @@ type IProps = {
     changItem: Function,
     removeItem: Function,
     updateItem: Function,
+    exchangePos: Function,
 }
 
 const List: React.FC<IProps> = (props) => {
@@ -20,8 +21,17 @@ const List: React.FC<IProps> = (props) => {
         changItem,
         removeItem,
         updateItem,
+        exchangePos
     } = props;
     const [inputing, setInputing] = useState<null | string>(null)
+    const [fromID, setFromID] = useState<null | number>(null)
+    const [toID, setToID] = useState<null | number>(null)
+
+    useEffect(() => {
+        document.body.onselectstart = function () {
+            return false;
+        };
+    }, [])
 
     const handleDone = (e: React.ChangeEvent<HTMLInputElement>, id: string) => {
         changItem(id, e.target.checked)
@@ -49,14 +59,51 @@ const List: React.FC<IProps> = (props) => {
             setInputing(null)
         }
     }
+
+    const formItem = (id: number) => {
+        setFromID(id)
+    }
+    const toItem = (id: number) => {
+        // exchangePos(fromID, id)
+        exchangePos(fromID, toID)
+        setFromID(null)
+    }
+    const highLightItem = (id: number) => {
+        setToID(id)
+    }
+    const normalItem = (id: number) => {
+        setToID(null)
+    }
     return (
         <>
-            <ul className="list">
+            <ul 
+            className={classNames({
+                'list': true,
+                
+            })}
+            >
                 {props.list.map((item, index) => {
                     return (<li
                         key={item.id}
-                        className={item.checked ? 'done' : ''}
-                        onDoubleClick={(e) => { intoEdit(e, item.id) }}>
+                        className={classNames({
+                            'done': item.checked,
+                            'from': index === fromID,
+                            'to': fromID !== null && index === toID,
+                            'toLast': toID===props.list.length&&index+1===props.list.length,
+                        })}
+                        onDoubleClick={(e) => { intoEdit(e, item.id) }}
+                        onMouseDown={(e) => { formItem(index);}}
+                        onMouseUp={(e) => { toItem(index) }}
+                        // onMouseEnter={(e) => { highLightItem(index);}}
+                        onMouseLeave={(e) => { normalItem(index) }}
+                        onMouseMove={(e) => {
+                            if ((e.pageY - (e.target as any).offsetTop) > 12) {
+                                highLightItem(index+1);
+                            } else {
+                                highLightItem(index);
+                            }
+                        }}
+                    >
                         <input type="checkbox"
                             onChange={(e) => { handleDone(e, item.id) }}
                             name={item.id}
