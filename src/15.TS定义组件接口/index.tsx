@@ -75,16 +75,16 @@ const IconB = () => {
 };
 interface TabsProps {
   color?: string;
-  IconX?: ReactElement;
-  IconL?: ReactNode;
-  children?:ReactNode
+  IconX?: ReactElement; //可以自己使用<>定义类型
+  IconL?: ReactNode; //包括ReactElement,还有string | number | boolean
+  children?: ReactNode; //ReactElement 传字符串会报错
 }
 const Tabs: React.FC<TabsProps> = (props) => {
-  const { color, IconX, IconL ,children} = props;
+  const { color, IconX, IconL, children } = props;
   return (
     <div>
       <ul>
-        <li style={{borderBottom:`1px solid ${color}`}}>
+        <li style={{ borderBottom: `1px solid ${color}` }}>
           <span>{IconX} 001</span>
         </li>
         <li>
@@ -110,9 +110,9 @@ export const App: React.FC<AppProps> = () => {
       <Tabs color="red" IconX={IconA()} IconL={IconB()}>
         <span>I am span</span>
       </Tabs>
-      <Tabs color="blue" IconX={<IconB/>} IconL={<IconA/>}>
+      <Tabs color="blue" IconX={<IconB />} IconL={<IconA />}>
         xxxx
-        <Button3 color={"yellow"}></Button3>
+        {/* <Button3 color={"yellow"}></Button3> */}
       </Tabs>
     </Wrapper>
   );
