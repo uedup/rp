@@ -16,11 +16,12 @@ type AppProps = {};
 export const App: React.FC<AppProps> = () => {
   const [list, setlist] = useState<listType>();
   const initial = () => {
-    fetch("/studio/mock/data.json")
+    fetch("/mock/data.json")
       .then((res) => {
         return res.json();
       })
       .then((json) => {
+        console.log(json)
         setlist(json);
       })
       .catch((err) => {
