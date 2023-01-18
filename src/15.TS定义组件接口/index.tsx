@@ -96,6 +96,15 @@ const Tabs: React.FC<TabsProps> = (props) => {
   );
 };
 
+interface BoxProps {
+  children?: ReactNode;
+}
+const Box: React.FC<BoxProps> = (props) => {
+  const { children } = props;
+
+  return <div>{children}</div>;
+};
+
 type AppProps = {};
 
 export const App: React.FC<AppProps> = () => {
@@ -112,8 +121,9 @@ export const App: React.FC<AppProps> = () => {
       </Tabs>
       <Tabs color="blue" IconX={<IconB />} IconL={<IconA />}>
         xxxx
-        {/* <Button3 color={"yellow"}></Button3> */}
+        <Button3 color={"yellow"}></Button3>
       </Tabs>
+      <Box children='abc'></Box>
     </Wrapper>
   );
 };
