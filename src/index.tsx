@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Demo from './B02.Tabs';
+import Demo from './18.异步加载&懒加载';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(

@@ -4,6 +4,8 @@ import styled from 'styled-components';
 const TabsWrapper = styled.div`
   ul{
     height: 32px;
+    margin: 0;
+    padding: 0;
   }
   li{
     list-style: none;
