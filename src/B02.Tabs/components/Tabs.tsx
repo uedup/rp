@@ -1,4 +1,4 @@
-import React, { useState, useEffect, ReactNode, cloneElement } from "react";
+import React, { useState, useEffect, ReactNode, cloneElement, ReactElement } from "react";
 import styled from 'styled-components';
 
 const TabsWrapper = styled.div`
@@ -25,7 +25,7 @@ export const TabPannel: React.FC<PannelPops> = (props) => {
   const { tabKey, actived, children } = props
   return (
     (actived !== tabKey)?null:
-    <div>
+    <div key={tabKey}>
       {children}
     </div>
   );
@@ -33,7 +33,7 @@ export const TabPannel: React.FC<PannelPops> = (props) => {
 
 type TabsProps = {
   initActiveTabKey: string
-  children?: ReactNode[]
+  children?: ReactElement[]
 };
 const Tabs: React.FC<TabsProps> = (props) => {
   const { initActiveTabKey, children } = props
@@ -41,12 +41,11 @@ const Tabs: React.FC<TabsProps> = (props) => {
   const openTabs = (keyId: string) => {
     setActived(keyId)
   }
-  console.log(children)
   return (
     <TabsWrapper>
       <ul>
-        {!!children && children.map((item: any, index: number) => {
-          return (<li key={index} onClick={() => { openTabs(item.props.tabKey) }}>
+        {!!children && children.map((item: ReactElement, index: number) => {
+          return (<li key={item.props.tabKey} onClick={() => { openTabs(item.props.tabKey) }}>
             <button className={actived === item.props.tabKey ? 'cur' : ''} >
               {item.props.label}
             </button>
@@ -56,9 +55,10 @@ const Tabs: React.FC<TabsProps> = (props) => {
       {/* {children?.map((item: any) => {
         return (actived === item.props.tabKey ? item : '')
       })} */}
-      {children?.map((item: any) => cloneElement(item, {
+      {children?.map((item: ReactElement) => cloneElement(item, {
         ...item.props,
-        actived
+        actived,
+        key:item.props.tabKey
       }))}
 
     </TabsWrapper>
