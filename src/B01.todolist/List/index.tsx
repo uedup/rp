@@ -84,6 +84,7 @@ const List: React.FC<IProps> = (props) => {
             >
                 {props.list.map((item, index) => {
                     return (<li
+                        // draggable={true}
                         key={item.id}
                         className={classNames({
                             'done': item.checked,
