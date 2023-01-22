@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Demo from './A03.暗黑模式';
+import Demo from './N02.React-redux';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
