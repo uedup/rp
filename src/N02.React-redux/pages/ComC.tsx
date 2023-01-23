@@ -1,13 +1,13 @@
 import { connect } from 'react-redux'
 
 type ComAProps = {
-    sendAction:Function
+    removeFromCart:Function
 };
 const ComC = (props:ComAProps) => {
     const handleClick = () => {
         // console.log(props)
         // 发送 action
-        props.sendAction()
+        props.removeFromCart()
     }
     return (<>
         <button onClick={handleClick}>-</button>
@@ -20,7 +20,7 @@ const ComC = (props:ComAProps) => {
  */
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        sendAction: () => {
+        removeFromCart: () => {
             dispatch({
                 type: 'minus_action'
             })

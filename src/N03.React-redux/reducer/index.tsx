@@ -5,26 +5,22 @@ export interface actionType {
     type:string
 }
 export type stateType = {
-    value: number,
-    info: string
+    isHeart:boolean
 }
 const initState = {
-    value: 8,
-    info: '默认值'
+    isHeart:false
 }
 const rootReducer = (state:stateType = initState, action: actionType) => {
-    // console.log('reducer', state, action)
+    console.log('reducer', state, action)
     switch (action.type) {
-        case 'add_action':
+        case 'stopSend':
             return {
-                value:state.value+1,
-                info: '添加'
+                isHeart:false
             }
             break;
-        case 'minus_action':
+        case 'sendLove':
             return {
-                value:state.value>1?state.value-1:0,
-                info: '减少'
+                isHeart:true
             }
             break;
 

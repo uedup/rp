@@ -1,13 +1,14 @@
 import { connect } from 'react-redux'
 
 type ComAProps = {
-    sendAction:Function
+    addToCart:Function
 };
+
 const ComA = (props:ComAProps) => {
     const handleClick = () => {
         // console.log(props)
         // 发送 action
-        props.sendAction()
+        props.addToCart()
     }
     return (<>
         <button onClick={handleClick}>+</button>
@@ -20,7 +21,7 @@ const ComA = (props:ComAProps) => {
  */
 const mapDispatchToProps = (dispatch: Function) => {
     return {
-        sendAction: () => {
+        addToCart: () => {
             dispatch({
                 type: 'add_action'
             })
