@@ -12,6 +12,7 @@ interface IState {
 export const SpecialInput: React.FC<IProps> = (props) => {
   const [value, setValue] = useState(props.value);
   const propsRef = useRef(props);
+  // setValue(props.value);
   if (props !== propsRef.current) {
     setValue(props.value);
     propsRef.current = props;
