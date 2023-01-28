@@ -71,7 +71,7 @@ const Modal = ({ open, title, children, onClose }, ref) => {
               ref={cancelRef}
             >
               取消
-            </button>{" "}
+            </button>{"      "}
             <button
               className="btn-confirm"
               onClick={handleConfirm}
