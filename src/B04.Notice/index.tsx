@@ -9,11 +9,11 @@ const App: React.FC<AppProps> = () => {
   const ref1 = useRef<IModalReturn>();
   const ref2 = useRef<IModalReturn>();
   const handleFocus1 = () => {
-    console.log(ref1.current?.open(["新消息111"]))
+    ref1.current?.open(["新消息111"])
     // open(["新消息"]);
   };
   const handleFocus2 = () => {
-    console.log(ref2.current?.open(["新消息222"]))
+    ref2.current?.open(["新消息222"])
     // open(["新消息"]);
   };
   return (
@@ -26,7 +26,6 @@ const App: React.FC<AppProps> = () => {
       </div>
       <button onClick={handleFocus1}>发出信息1</button>
       <button onClick={handleFocus2}>发出信息2</button>
-      <p></p>
     </>
   );
 };
