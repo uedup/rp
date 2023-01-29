@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import Child from "./Child";
+import Child2 from "./Child2.jsx";
+import Child3 from "./Child3.jsx";
 
 export default class index extends Component {
   state = {
@@ -32,43 +34,16 @@ export default class index extends Component {
         {this.state.hasError ? (
           "函数组件有错误"
         ) : (
-          <Child2 a={{ b: () => {} }} />
+          <Child2 />
+        )}
+        <p></p>
+        {this.state.hasError ? (
+          "函数组件有错误"
+        ) : (
+          <Child3 a={{ b: () => {} }} />
         )}
         <p><a href="https://www.zhihu.com/question/426336743/answer/2390432815">React单页面应用如何捕获错误？防止整个页面的崩溃？</a></p>
       </>
     );
   }
 }
-// Hooks 函数组件
-interface CProps {
-  a: {
-    b: Function;
-  };
-}
-const Child2 = (props: CProps) => {
-  const val = {
-    book: [
-      {
-        id: "001",
-        title: "前端开发指南11",
-      },
-      {
-        id: "002",
-        title: "CSS3指南22",
-      },
-    ],
-  };
-  React.useEffect(() => {
-    console.log(1);
-    // props.a.b;
-    console.log(2);
-  }, [props.a.b]);
-
-  return (
-    <div>
-      {val.book.map((item) => {
-        return <li key={item.id}>{item.title}</li>;
-      })}
-    </div>
-  );
-};

@@ -18,9 +18,11 @@ export default class Child extends Component {
     return (
       <>
         <h4>Child Component</h4>
-        {this.state.book.map((item) => {
-          return <li key={item.id}>{item.title}</li>;
-        })}
+        <ul>
+          {this.state.book.map((item) => {
+            return <li key={item.id}>{item.title}</li>;
+          })}
+        </ul>
       </>
     );
   }
