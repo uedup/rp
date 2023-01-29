@@ -9,13 +9,16 @@ type AppProps = {
 export const App: React.FC<AppProps> = ({ message, children }) => {
   const [count, setCount] = useState();
   useEffect(() => {
+    console.log("render");
+  });
+  useEffect(() => {
     console.log("componentDidMount");
     return () => {
       console.log("Demo-componentWillUnmount");
     };
-  });
+  }, []);
   useEffect(() => {
-    console.log("shouldComponentUpdate");
+    console.log("shouldComponentUpdate", count);
   }, [count]);
   return (
     <div>

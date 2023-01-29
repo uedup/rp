@@ -1,7 +1,7 @@
-import React, { Component, useState } from "react";
+import React, {useState } from "react";
 
 const Child2 = (props) => {
-  const [state, setState] = useState({
+  const [state] = useState({
     book: [
       {
         id: "003",
