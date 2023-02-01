@@ -1,25 +1,25 @@
-import {useRef,forwardRef,useImperativeHandle} from 'react'
-const Register = ({},ref) => {
+import { useRef, forwardRef, useImperativeHandle } from 'react'
+const Register = ({ }, ref) => {
 
-  const usernameRef=useRef()
-  const passwordRef=useRef()
+  const usernameRef = useRef()
+  const passwordRef = useRef()
 
-  useImperativeHandle(ref,()=>{
+  useImperativeHandle(ref, () => {
     return {
       usernameRef,
       passwordRef
     }
-  },[])
- 
+  }, [])
+
   return (
     <div>
-      <form onSubmit={(e)=>{
-          e.preventDefault()
+      <form onSubmit={(e) => {
+        e.preventDefault()
       }}>
-        <input name="username" placeholder="用户名"  ref={usernameRef} />
+        <input name="username" placeholder="用户名" ref={usernameRef} />
         <input name="password" type="password" ref={passwordRef} placeholder="密码" />
-        <button onClick={()=>{
-          
+        <button onClick={() => {
+
         }}>注册</button>
       </form>
     </div>
