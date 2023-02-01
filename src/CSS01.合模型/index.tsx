@@ -18,6 +18,8 @@ padding: 10px;
     background-color: aliceblue;
 
     padding:20px 15px 10px 5px;
+
+    margin: 10px;
   }
 `;
 type AppProps = {
@@ -70,7 +72,7 @@ const App: React.FC<AppProps> = () => {
       <p>
         widht+height:是内容区域，未来子节点可以使用的区域
         内容区域+padding:clientWidth/clientHeight, 背景色可以覆盖
-        clientWidth/clientHeight+border:offsetWidth/offsetHeight
+        clientWidth/clientHeight+border:可见框offsetWidth/offsetHeight
       </p>
     </>
   )
