@@ -31,7 +31,10 @@ function Demo(props: IProps) {
         })
     }
     const handleAddNum = () => {
+        // num++
+        // setNum(num)
         setNum(num++)
+        console.log(num)
     }
 
     const [number, setNumber] = React.useState(0)
