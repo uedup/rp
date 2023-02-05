@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Demo from './C01.8.粘滞定位';
+import Demo from './C01.6.绝对定位';
 import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(
